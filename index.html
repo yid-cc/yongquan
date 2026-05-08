@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="永泉建筑科技，AI驱动的未来建筑解决方案。自主研发土壤固化剂、无人机勘测、AI智筑平台，让设计快30%，成本降15%，寿命延30年。">
+    <title>永泉建筑科技 | AI驱动的未来建筑解决方案</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root { --primary: #0066ff; --primary-dark: #0044cc; --accent: #00c2a8; --text: #1a1a2e; --text-secondary: #555; --bg: #ffffff; --bg-light: #f5f8ff; --border: #e0e6f0; --radius: 16px; --shadow: 0 8px 30px rgba(0,0,0,0.04); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 200; background: rgba(255,255,255,0.92); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); padding: 16px 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; letter-spacing: 2px; color: var(--primary); text-decoration: none; }
+        .logo img { height: 44px; width: auto; }
+        .nav-links { display: flex; list-style: none; gap: 36px; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 15px; font-weight: 500; position: relative; }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: 0.2s; }
+        .nav-links a:hover::after { width: 100%; }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+        .menu-toggle span { display: block; width: 25px; height: 2px; background: var(--primary); }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: white; padding: 20px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); gap: 16px; }
+        }
+        .hero { position: relative; height: 700px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; color: white; margin-top: 70px; background: #070b19; }
+        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7,11,25,0.5); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; padding: 0 20px; }
+        .hero h1 { font-size: 55px; font-weight: 700; letter-spacing: 3px; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(90deg, #00c2a8, #00e6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero .subtitle { font-size: 22px; opacity: 0.9; margin-bottom: 10px; font-weight: 300; }
+        .hero .hero-stats { font-size: 16px; opacity: 0.8; max-width: 650px; margin: 0 auto 30px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .btn { display: inline-block; padding: 14px 36px; border-radius: 40px; text-decoration: none; font-weight: 600; font-size: 16px; transition: all 0.3s; letter-spacing: 1px; margin: 8px; }
+        .btn-primary { background: linear-gradient(120deg, var(--primary), #0080ff); color: white; border: none; box-shadow: 0 8px 20px rgba(0,102,255,0.3); }
+        .btn-primary:hover { box-shadow: 0 12px 28px rgba(0,102,255,0.5); transform: translateY(-2px); }
+        .btn-outline { border: 2px solid rgba(255,255,255,0.8); color: white; }
+        .btn-outline:hover { background: rgba(255,255,255,0.15); }
+        .section { padding: 90px 0; }
+        .section-title { text-align: center; font-size: 38px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+        .section-subtitle { text-align: center; color: var(--text-secondary); font-size: 18px; margin-bottom: 50px; }
+        .section-line { width: 70px; height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent)); margin: 0 auto 45px; }
+        .ai-platform { background: var(--bg-light); }
+        .ai-showcase { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; background: linear-gradient(135deg, #0a1a3a, #0d2b4e); border-radius: var(--radius); padding: 50px; color: white; margin-top: 30px; }
+        .ai-showcase-text { flex: 1; min-width: 280px; }
+        .ai-showcase-text h3 { font-size: 30px; margin-bottom: 20px; background: linear-gradient(90deg, #fff, #00e6ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .ai-showcase-text ul { list-style: none; }
+        .ai-showcase-text ul li { padding: 10px 0; font-size: 16px; opacity: 0.9; display: flex; align-items: center; }
+        .ai-showcase-text ul li::before { content: '✦'; color: var(--accent); margin-right: 12px; font-size: 18px; }
+        .ai-showcase-img { flex: 1; min-width: 250px; text-align: center; }
+        .compare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .compare-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: 0.3s; }
+        .compare-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+        .compare-head { padding: 15px 25px; font-weight: 700; font-size: 18px; }
+        .compare-head.before { background: #f0f0f5; color: #555; }
+        .compare-head.after { background: linear-gradient(120deg, var(--primary), var(--accent)); color: white; }
+        .compare-body { padding: 20px 25px; font-size: 15px; color: var(--text-secondary); line-height: 1.7; }
+        .material-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; margin-top: 20px; }
+        .material-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 35px 25px; text-align: center; transition: all 0.3s; }
+        .material-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,102,255,0.08); border-color: var(--primary); }
+        .material-icon { width: 64px; margin: 0 auto 20px; }
+        .material-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--text); }
+        .material-card p { font-size: 15px; color: var(--text-secondary); }
+        .material-tag { display: inline-block; background: #e8f0fe; color: var(--primary); padding: 3px 12px; border-radius: 15px; font-size: 13px; margin-top: 10px; }
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
+        .tech-card { background: var(--bg-light); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; display: flex; gap: 20px; align-items: flex-start; transition: all 0.3s; }
+        .tech-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+        .tech-icon-bg { width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .tech-icon-bg svg { width: 32px; height: 32px; }
+        .tech-text h4 { font-size: 20px; margin-bottom: 8px; color: var(--text); }
+        .tech-text p { font-size: 14px; color: var(--text-secondary); }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .news-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; transition: all 0.3s; }
+        .news-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--primary); }
+        .news-date { font-size: 13px; color: #999; margin-bottom: 10px; }
+        .news-card h3 { font-size: 20px; color: var(--text); margin-bottom: 12px; }
+        .news-card h3 a { color: inherit; text-decoration: none; }
+        .news-card h3 a:hover { color: var(--primary); }
+        .news-card p { font-size: 14px; color: var(--text-secondary); }
+        .news-tag { display: inline-block; background: #e8f0fe; color: var(--primary); padding: 2px 10px; border-radius: 15px; font-size: 12px; margin-left: 8px; }
+        .about-flex { display: flex; align-items: center; gap: 60px; flex-wrap: wrap; background: var(--bg-light); border-radius: var(--radius); padding: 50px; margin-top: 30px; }
+        .about-illustration { flex: 1; min-width: 200px; text-align: center; }
+        .about-text { flex: 1.2; min-width: 280px; }
+        .about-text p { font-size: 16px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 15px; }
+        .about-text strong { color: var(--primary); }
+        .state-card { background: linear-gradient(135deg, #f0f6ff, #ffffff); border: 1px solid var(--border); border-radius: var(--radius); padding: 50px; text-align: center; margin: 40px 0; }
+        .state-card h2 { font-size: 28px; color: var(--text); margin-bottom: 20px; }
+        .state-card p { font-size: 16px; color: var(--text-secondary); max-width: 750px; margin: 0 auto; line-height: 1.8; }
+        .state-badge { display: inline-block; background: var(--primary); color: white; padding: 6px 20px; border-radius: 20px; font-size: 14px; margin-bottom: 25px; }
+        .vision-grid { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; }
+        .vision-card { flex: 1 1 200px; background: var(--bg-light); border: 1px solid var(--border); border-radius: 12px; padding: 30px 20px; text-align: center; transition: 0.3s; }
+        .vision-card:hover { border-color: var(--primary); }
+        .vision-num { font-size: 36px; font-weight: 700; color: var(--primary); }
+        .vision-label { font-size: 15px; color: var(--text-secondary); margin-top: 10px; }
+        .footer { background: var(--bg-light); padding: 45px 0; text-align: center; color: var(--text-secondary); font-size: 14px; border-top: 1px solid var(--border); margin-top: 80px; }
+        .footer h3 { color: var(--primary); margin-bottom: 15px; }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; }
+        .footer-links a:hover { color: var(--primary); }
+        .ai-fab { position: fixed; bottom: 30px; right: 30px; z-index: 300; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 25px rgba(0,102,255,0.4); cursor: pointer; font-size: 24px; }
+        .ai-fab:hover { transform: scale(1.1); }
+        .ai-chat { position: fixed; bottom: 100px; right: 30px; width: 300px; z-index: 300; background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); overflow: hidden; display: none; flex-direction: column; }
+        .ai-chat.active { display: flex; }
+        .chat-header { background: linear-gradient(120deg, #0a1a3a, #0d2b4e); color: white; padding: 16px 20px; font-weight: 600; display: flex; justify-content: space-between; }
+        .chat-body { padding: 20px; }
+        .chat-body p { font-size: 14px; color: #555; margin-bottom: 12px; }
+        .chat-btn { display: block; width: 100%; text-align: left; padding: 10px 15px; border: 1px solid var(--border); border-radius: 10px; background: white; margin-bottom: 8px; cursor: pointer; font-size: 14px; }
+        .chat-btn:hover { background: var(--bg-light); border-color: var(--primary); }
+        .loading-inline { text-align: center; grid-column: 1 / -1; padding: 40px; color: #999; }
+        .error-inline { text-align: center; grid-column: 1 / -1; padding: 40px; color: #d33; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="永泉建筑科技">永泉建筑科技</a>
+            <button class="menu-toggle" id="menuToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="solutions.html">解决方案</a></li>
+                <li><a href="services.html">服务支持</a></li>
+                <li><a href="cases.html">案例展示</a></li>
+                <li><a href="news.html">AI洞察</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li><a href="contact.html">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-aos="zoom-in">
+            <h1>建筑的<span>智慧大脑</span>，让每一平米更聪明</h1>
+            <div class="subtitle">永泉AI智筑平台 · 设计快30% · 成本降15% · 寿命延30年</div>
+            <div class="hero-stats">
+                <span>🚁 无人机勘测45分钟</span><span>🧱 固化剂减碳40%</span><span>🤖 砌筑机器人300块/时</span>
+            </div>
+            <div>
+                <a href="#ai-platform" class="btn btn-primary">看 AI 如何改变你的项目</a>
+                <a href="solutions.html" class="btn btn-outline">探索全部解决方案</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section ai-platform" id="ai-platform">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">永泉AI智筑平台 · 建筑大脑</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">从设计到运维，人工智能正在重塑建筑的生命力</p>
+            <div class="section-line" data-aos="fade-up" data-aos-delay="80"></div>
+            <div class="ai-showcase" data-aos="fade-up" data-aos-delay="100">
+                <div class="ai-showcase-text">
+                    <h3>四大核心能力</h3>
+                    <ul>
+                        <li>生成式设计：秒出合规方案，支持风格迁移</li>
+                        <li>施工全景监控：进度识别、安全预警、工效分析</li>
+                        <li>数字孪生运维：能耗模拟、故障预测准确率＞90%</li>
+                        <li>全周期碳排放管理：助你轻松对接碳交易</li>
+                    </ul>
+                </div>
+                <div class="ai-showcase-img">
+                    <svg viewBox="0 0 300 200" fill="none"><rect x="50" y="150" width="200" height="30" rx="8" fill="rgba(0,198,168,0.3)" stroke="#00c2a8" stroke-width="1.5"/><polygon points="150,20 230,80 190,160 110,160 70,80" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/><circle cx="150" cy="90" r="18" fill="none" stroke="#00e6ff" stroke-width="2" stroke-dasharray="5 5"/><line x1="150" y1="72" x2="150" y2="55" stroke="#00e6ff" stroke-width="2"/></svg>
+                </div>
+            </div>
+            <div class="compare-grid">
+                <div class="compare-card" data-aos="fade-right"><div class="compare-head before">传统方式</div><div class="compare-body">⏱ 地形测量耗时2天<br>📄 设计修改反复1周<br>⚠️ 裂缝发现滞后6个月</div></div>
+                <div class="compare-card" data-aos="fade-left"><div class="compare-head after">永泉 AI 方案</div><div class="compare-body">🚀 无人机+AI 45分钟出报告<br>✨ 生成式设计秒出3套方案<br>🛡 自修复材料+AI预警实时守护</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="materials">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">新型建筑材料</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">自主研发环保固化剂与高性能建材，夯实科技地基</p>
+            <div class="section-line" data-aos="fade-up" data-aos-delay="80"></div>
+            <div class="material-grid">
+                <div class="material-card" data-aos="zoom-in" data-aos-delay="100"><div class="material-icon"><svg viewBox="0 0 64 64"><rect x="12" y="20" width="40" height="36" rx="6" fill="none" stroke="#0066FF" stroke-width="2.5"/></svg></div><h3>YS-1 土壤固化剂</h3><p>提升承载力300%，水泥减量40%。</p><span class="material-tag">环保专利</span></div>
+                <div class="material-card" data-aos="zoom-in" data-aos-delay="150"><div class="material-icon"><svg viewBox="0 0 64 64"><polygon points="32,8 56,28 44,56 20,56 8,28" fill="none" stroke="#0066FF" stroke-width="2.5"/></svg></div><h3>纳米改性防水涂料</h3><p>拉伸强度3.2MPa，远超国标。</p><span class="material-tag">高耐久</span></div>
+                <div class="material-card" data-aos="zoom-in" data-aos-delay="200"><div class="material-icon"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="44" height="32" rx="5" fill="none" stroke="#0066FF" stroke-width="2.5"/></svg></div><h3>自修复水泥基材料</h3><p>裂缝自动愈合，寿命延长30%。</p><span class="material-tag">智能材料</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--bg-light);" id="tech-equip">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">科技赋能 · 智慧装备</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">无人机、物联网与机器人装备，重新定义施工效率与精度</p>
+            <div class="section-line" data-aos="fade-up" data-aos-delay="80"></div>
+            <div class="tech-grid">
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="100"><div class="tech-icon-bg"><svg viewBox="0 0 32 32"><path d="M16,4 L28,24 L16,20 L4,24 Z" fill="none" stroke="white" stroke-width="2"/></svg></div><div class="tech-text"><h4>无人机智能勘测</h4><p>激光雷达+高光谱，100亩测绘45分钟。</p></div></div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="150"><div class="tech-icon-bg"><svg viewBox="0 0 32 32"><rect x="6" y="10" width="20" height="16" rx="3" fill="none" stroke="white" stroke-width="2"/></svg></div><div class="tech-text"><h4>物联网实时监测</h4><p>传感器网络+边缘计算，预警延迟＜50ms。</p></div></div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="200"><div class="tech-icon-bg"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="none" stroke="white" stroke-width="2"/></svg></div><div class="tech-text"><h4>砌筑机器人</h4><p>300块/时，垂直度误差＜2mm。</p></div></div>
+                <div class="tech-card" data-aos="fade-up" data-aos-delay="250"><div class="tech-icon-bg"><svg viewBox="0 0 32 32"><path d="M2,26 L16,6 L30,26 Z" fill="none" stroke="white" stroke-width="2"/></svg></div><div class="tech-text"><h4>3D打印建造</h4><p>连续打印高度8米，造型自由度高。</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">最新AI建筑动态</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="50">掌握行业脉搏，见证永泉科技发声</p>
+            <div class="section-line" data-aos="fade-up" data-aos-delay="80"></div>
+            <div class="news-grid" id="homeNewsGrid">
+                <div class="loading-inline">⏳ 正在加载最新资讯...</div>
+            </div>
+            <div style="text-align:center; margin-top:40px;" data-aos="fade-up"><a href="news.html" class="btn btn-primary">浏览全部动态 →</a></div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">关于永泉建筑科技</h2>
+            <div class="section-line" data-aos="fade-up" data-aos-delay="50"></div>
+            <div class="about-flex" data-aos="fade-up" data-aos-delay="100">
+                <div class="about-illustration"><svg viewBox="0 0 240 180" fill="none"><rect x="20" y="150" width="200" height="26" rx="8" fill="#E8F0FE" stroke="#0066FF" stroke-width="1.5"/></svg></div>
+                <div class="about-text">
+                    <p>永泉建筑科技有限公司成立于2009年，总部位于杭州。2025年完成战略转型，聚焦<strong>新型建筑材料研发、智能装备集成与AI建筑平台</strong>，致力于用科技重构建筑的生产力边界。</p>
+                    <a href="about.html" class="btn btn-primary" style="margin-top:15px;">了解更多 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">首页</a><a href="solutions.html">解决方案</a><a href="services.html">服务支持</a><a href="cases.html">案例展示</a><a href="news.html">AI洞察</a><a href="about.html">关于我们</a><a href="contact.html">联系我们</a>
+            </div>
+            <h3>永泉建筑科技有限公司</h3>
+            <p>地址：浙江省杭州大江东产业集聚区义蓬街道青六中路888号义蓬科创园1601室</p>
+            <p>电话：0571-8298**** ｜ 邮箱：ai@yongquan.tech</p>
+            <p style="margin-top:20px; opacity:0.7;">© 2025 永泉建筑科技 · AI驱动未来建筑</p>
+        </div>
+    </footer>
+
+    <div class="ai-fab" id="aiFab" title="AI建筑顾问">💬</div>
+    <div class="ai-chat" id="aiChat">
+        <div class="chat-header"><span>🤖 AI建筑顾问</span><span id="chatClose" style="cursor:pointer;">✕</span></div>
+        <div class="chat-body">
+            <p>你好！我可以帮你初步评估项目：</p>
+            <button class="chat-btn">我的工地适合土壤固化剂吗？</button>
+            <button class="chat-btn">50亩项目土方测量需要多久？</button>
+            <button class="chat-btn">如何获取数字孪生方案？</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        var aiFab = document.getElementById('aiFab');
+        var aiChat = document.getElementById('aiChat');
+        aiFab.addEventListener('click', function() { aiChat.classList.toggle('active'); });
+        document.getElementById('chatClose').addEventListener('click', function() { aiChat.classList.remove('active'); });
+        
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#0066ff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: '#00c2a8', opacity: 0.15, width: 1 },
+                move: { enable: true, speed: 2 }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: { onhover: { enable: true, mode: 'grab' }, onclick: { enable: true, mode: 'push' } },
+                modes: { grab: { distance: 140, line_linked: { opacity: 0.4 } }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+
+        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+
+        // ===== 内置兜底新闻 =====
+        var FALLBACK_NEWS_HOME = [
+            {"date":"2025-04-28","title":"永泉YS系列土壤固化剂通过省级鉴定，固废利用率超70%","tags":["新材料","公司动态"],"summary":"永泉自主研发的YS-1型离子土壤固化剂近日通过浙江省建材工业协会鉴定，可实现就地土壤固化，固废利用率高达70%以上，水泥用量减少40%，处理后地基承载力可达300kPa。","link":"news-detail.html?id=0"},
+            {"date":"2025-04-25","title":"无人机+AI土方测量系统投入使用，效率提升20倍","tags":["智能装备","技术前沿"],"summary":"永泉技术团队在杭州某智慧工地完成无人机AI土方测量对比测试：100亩复杂地形，从航线规划、自动航飞到土方量计算输出报告仅需45分钟，传统RTK测量需2天，效率提升20倍以上。","link":"news-detail.html?id=1"},
+            {"date":"2025-04-20","title":"国务院国资委发文推动央企\u201CAI+\u201D行动，建筑业成重点场景","tags":["政策风向"],"summary":"国务院国资委召开中央企业\u201CAI+\u201D专项行动推进会，明确在建筑、制造、能源等八大领域推动人工智能深度融合。","link":"news-detail.html?id=2"}
+        ];
+
+        // ===== 渲染首页新闻卡片 =====
+        function renderHomeNews(data) {
+            var grid = document.getElementById('homeNewsGrid');
+            if (!grid) return;
+            if (!data || data.length === 0) {
+                grid.innerHTML = '<div class="loading-inline">📭 暂无新闻</div>';
+                return;
+            }
+            grid.innerHTML = '';
+            var count = Math.min(3, data.length);
+            for (var i = 0; i < count; i++) {
+                var item = data[i];
+                var parts = item.date.split('-');
+                var monthDisplay = parseInt(parts[1]) + '月';
+                var card = document.createElement('div');
+                card.className = 'news-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', String(100 + i * 50));
+                var summaryShort = item.summary.length > 40 ? item.summary.substring(0, 40) + '...' : item.summary;
+                card.innerHTML =
+                    '<div class="news-date">' + parts[0] + '年' + monthDisplay + '</div>' +
+                    '<h3><a href="' + item.link + '">' + item.title + '</a> <span class="news-tag">' + item.tags[0] + '</span></h3>' +
+                    '<p>' + summaryShort + '</p>' +
+                    '<a href="' + item.link + '" style="color:var(--primary); font-size:14px; text-decoration:none;">阅读全文 →</a>';
+                grid.appendChild(card);
+            }
+            if (typeof AOS !== 'undefined') AOS.refresh();
+        }
+
+        // ===== 加载策略：localStorage → fetch datanews.json → 兜底 =====
+        (function loadHomeNewsData() {
+            // 第1优先：localStorage
+            var stored = localStorage.getItem('yongquan_news');
+            if (stored) {
+                try {
+                    var localData = JSON.parse(stored);
+                    if (localData && localData.length > 0) {
+                        console.log('✅ 首页新闻来源：localStorage');
+                        renderHomeNews(localData);
+                        return;
+                    }
+                } catch(e) {}
+            }
+
+            // 第2优先：fetch
+            console.log('📡 首页 fetch datanews.json...');
+            fetch('datanews.json')
+                .then(function(r) {
+                    if (!r.ok) throw new Error('HTTP ' + r.status);
+                    return r.json();
+                })
+                .then(function(data) {
+                    if (data && data.length > 0) {
+                        console.log('✅ 首页新闻来源：datanews.json');
+                        localStorage.setItem('yongquan_news', JSON.stringify(data));
+                        renderHomeNews(data);
+                    } else {
+                        throw new Error('JSON 为空');
+                    }
+                })
+                .catch(function(err) {
+                    console.warn('⚠️ 首页 fetch 失败，使用兜底数据: ' + err.message);
+                    renderHomeNews(FALLBACK_NEWS_HOME);
+                });
+        })();
+    </script>
+</body>
+</html>

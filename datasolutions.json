@@ -1,0 +1,47 @@
+[
+  {
+    "id": "new-materials",
+    "icon": "🧱",
+    "image": "images/solution-materials.jpg",
+    "title": "新型建筑材料研发",
+    "tags": ["土壤固化剂", "防水新材料", "自修复材料"],
+    "description": "依托自建实验室研发高性能绿色建材，降低工程碳排放，提高结构耐久性。",
+    "features": [
+      {"name": "YS-1 土壤固化剂", "detail": "就地取材固化，承载力提升300%，水泥减量40%"},
+      {"name": "纳米改性防水涂料", "detail": "拉伸强度3.2MPa，适用于地下综合管廊与屋面"},
+      {"name": "自修复混凝土", "detail": "微裂缝自动愈合，延长结构寿命30%"}
+    ],
+    "link": "services.html"
+  },
+  {
+    "id": "smart-equipment",
+    "icon": "🚁",
+    "image": "images/solution-equipment.jpg",
+    "title": "智能装备集成应用",
+    "tags": ["无人机", "物联网", "砌筑机器人", "3D打印"],
+    "description": "引入航空、机器人领域成熟技术，打造自动化、高精度的施工装备体系。",
+    "features": [
+      {"name": "无人机智能勘测", "detail": "100亩地形测绘仅需1小时，土方计算厘米级精度"},
+      {"name": "物联网实时监测", "detail": "沉降、倾斜、温湿度数据边缘计算预警，延迟＜50ms"},
+      {"name": "砌筑机器人", "detail": "标准砖砌筑300块/小时，垂直度误差＜2mm"},
+      {"name": "大型3D打印系统", "detail": "连续打印高度8米，释放复杂造型潜力"}
+    ],
+    "link": "services.html"
+  },
+  {
+    "id": "ai-platform",
+    "icon": "🧠",
+    "image": "images/solution-ai.jpg",
+    "title": "永泉AI智筑平台",
+    "tags": ["生成式设计", "施工监控", "数字孪生", "碳排放"],
+    "description": "为建筑注入智慧大脑，实现从设计到运维的全生命周期智能决策。",
+    "features": [
+      {"name": "AI生成式设计", "detail": "输入条件自动生成合规方案，支持风格迁移与多方案比选"},
+      {"name": "施工全景监控", "detail": "计算机视觉识别进度、安全隐患，工效分析实时反馈"},
+      {"name": "数字孪生运维", "detail": "1:1映射建筑状态，能耗模拟、设备故障预测准确率＞90%"},
+      {"name": "全周期碳排放管理", "detail": "追踪建材生产到运营碳足迹，辅助企业碳交易"}
+    ],
+    "link": "services.html"
+  }
+]
+
