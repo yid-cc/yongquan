@@ -32,10 +32,14 @@
         .contact-form h2 { font-size: 28px; margin-bottom: 20px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-weight: 500; margin-bottom: 8px; color: var(--text); }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; transition: border-color 0.3s; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; transition: border-color 0.3s; font-family: inherit; }
         .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
         .contact-form .btn-submit { background: linear-gradient(120deg, var(--primary), #0080ff); color: white; border: none; padding: 14px 36px; border-radius: 40px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px rgba(0,102,255,0.3); transition: all 0.3s; }
         .contact-form .btn-submit:hover { box-shadow: 0 12px 28px rgba(0,102,255,0.5); transform: translateY(-2px); }
+        .contact-form .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .form-feedback { padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; display: none; }
+        .form-feedback.success { display: block; background: #e6fff0; color: #0a7; border: 1px solid #b3eed0; }
+        .form-feedback.error { display: block; background: #fff0f0; color: #d33; border: 1px solid #fcc; }
         .contact-info { flex: 0.8; min-width: 250px; }
         .info-card { background: var(--bg-light); border-radius: var(--radius); padding: 30px; margin-bottom: 20px; }
         .info-card h3 { font-size: 20px; color: var(--primary); margin-bottom: 15px; }
@@ -80,16 +84,55 @@
 
     <div class="container">
         <div class="contact-grid">
+            <!-- ═══════════════ 联系表单 ═══════════════ -->
             <div class="contact-form" data-aos="fade-right">
                 <h2>发送消息</h2>
-                <form action="#" method="post">
-                    <div class="form-group"><label for="name">姓名</label><input type="text" id="name" name="name" required></div>
-                    <div class="form-group"><label for="email">邮箱</label><input type="email" id="email" name="email" required></div>
-                    <div class="form-group"><label for="phone">电话</label><input type="tel" id="phone" name="phone"></div>
-                    <div class="form-group"><label for="message">需求描述</label><textarea id="message" name="message" rows="5" placeholder="请简要描述您的项目或技术需求……"></textarea></div>
-                    <button type="submit" class="btn-submit">提交咨询 →</button>
+
+                <!-- 提交成功/失败的提示条 -->
+                <div class="form-feedback" id="formFeedback"></div>
+
+                <!--
+                  action: Formspree 接收地址
+                    注册 Formspree 后改为 https://formspree.io/f/你的ID
+                    目前用 # 占位，提交不会发送
+                  method: POST（必须，Formspree 要求）
+                -->
+                <form id="contactForm"
+                      action="https://formspree.io/f/mjgljwpa"
+                      method="post">
+
+                    <!-- _subject: 你收到邮件时的标题 -->
+                    <input type="hidden" name="_subject" value="永泉官网 - 新的客户咨询">
+
+                    <!-- _next: 提交成功后跳转的感谢页面（可选） -->
+                    <input type="hidden" name="_next" value="">
+
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" placeholder="例如：zhangsan@company.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">电话</label>
+                        <input type="tel" id="phone" name="phone" placeholder="方便我们电话沟通">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">需求描述</label>
+                        <textarea id="message" name="message" rows="5"
+                                  placeholder="请简要描述您的项目类型、规模或技术需求，以便我们提前准备方案……"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">提交咨询 →</button>
                 </form>
             </div>
+
+            <!-- ═══════════════ 联系方式卡片 ═══════════════ -->
             <div class="contact-info" data-aos="fade-left">
                 <div class="info-card">
                     <h3>📍 公司地址</h3>
@@ -134,11 +177,72 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        document.getElementById('menuToggle').addEventListener('click', ()=> document.getElementById('navLinks').classList.toggle('active'));
+        document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('active'));
         const aiFab = document.getElementById('aiFab'), aiChat = document.getElementById('aiChat');
-        aiFab.addEventListener('click', ()=> aiChat.classList.toggle('active'));
-        document.getElementById('chatClose').addEventListener('click', ()=> aiChat.classList.remove('active'));
+        aiFab.addEventListener('click', () => aiChat.classList.toggle('active'));
+        document.getElementById('chatClose').addEventListener('click', () => aiChat.classList.remove('active'));
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true });
+
+        /*
+         * ═══════════════════════════════════════════
+         *  表单 AJAX 提交（无刷新发送，体验更好）
+         * ═══════════════════════════════════════════
+         *
+         *  原理：
+         *    1. 用户点"提交咨询"
+         *    2. JS 拦截默认跳转，用 fetch 异步发送到 Formspree
+         *    3. 成功 → 显示绿色提示
+         *    4. 失败 → 显示红色提示
+         *
+         *  如果你直接用 Formspree 默认行为（不用这段JS），
+         *  把下面整个 addEventListener 删掉即可。
+         *  Formspree 会自己处理并跳转到感谢页。
+         */
+        var form = document.getElementById('contactForm');
+        var feedback = document.getElementById('formFeedback');
+        var submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function(e) {
+            // 如果 action 还是占位符，阻止提交并提示
+            if (form.action.indexOf('改成你的ID') !== -1) {
+                e.preventDefault();
+                feedback.className = 'form-feedback error';
+                feedback.textContent = '⚠️ 请先注册 Formspree（formspree.io），然后将本页 action 替换为你的地址';
+                return;
+            }
+
+            // 禁用按钮，防止重复提交
+            submitBtn.disabled = true;
+            submitBtn.textContent = '发送中...';
+
+            // 用 fetch 发送表单数据（无刷新）
+            var formData = new FormData(form);
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    // ✅ 成功
+                    feedback.className = 'form-feedback success';
+                    feedback.textContent = '✅ 感谢您的咨询！我们将在24小时内与您联系。';
+                    form.reset(); // 清空表单
+                } else {
+                    throw new Error('服务器响应异常');
+                }
+            })
+            .catch(function(error) {
+                // ❌ 失败
+                feedback.className = 'form-feedback error';
+                feedback.textContent = '⚠️ 发送失败，请稍后重试。或直接拨打 0571-8298**** 联系我们。';
+            })
+            .finally(function() {
+                // 恢复按钮
+                submitBtn.disabled = false;
+                submitBtn.textContent = '提交咨询 →';
+            });
+        });
     </script>
 </body>
 </html>
